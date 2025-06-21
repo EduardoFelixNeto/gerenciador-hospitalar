@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Bem-vindo!</h2>
+  <p>Saldo de Pontos: <strong>{{ dashboardData?.saldoPontos }}</strong></p>
+
+  <mat-tab-group>
+    <mat-tab label="Futuros">
+      <app-agendamento-lista [agendamentos]="getAgendamentosPorStatus('CRIADO')"></app-agendamento-lista>
+    </mat-tab>
+    <mat-tab label="Realizados">
+      <app-agendamento-lista [agendamentos]="getAgendamentosPorStatus('REALIZADO')"></app-agendamento-lista>
+    </mat-tab>
+    <mat-tab label="Cancelados">
+      <app-agendamento-lista [agendamentos]="getAgendamentosPorStatus('CANCELADO')"></app-agendamento-lista>
+    </mat-tab>
+  </mat-tab-group>
+</div>
