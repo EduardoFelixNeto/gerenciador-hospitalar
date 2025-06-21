@@ -1,6 +1,7 @@
 <div class="container">
   <h2>Bem-vindo!</h2>
   <p>Saldo de Pontos: <strong>{{ dashboardData?.saldoPontos }}</strong></p>
+  <button mat-stroked-button color="accent" (click)="abrirDialogCompra()">Comprar Pontos</button>
 
   <mat-tab-group>
     <mat-tab label="Futuros">

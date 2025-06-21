@@ -1,0 +1,13 @@
+<h2>Comprar Pontos</h2>
+
+<mat-form-field appearance="outline">
+  <mat-label>Quantidade de Pontos</mat-label>
+  <input matInput type="number" [formControl]="quantidadeControl" (input)="calcularValor()">
+</mat-form-field>
+
+<p>Valor total: <strong>R$ {{ valorTotal }}</strong></p>
+
+<div style="margin-top: 16px;">
+  <button mat-raised-button color="primary" (click)="comprar()" [disabled]="quantidadeControl.invalid">Confirmar</button>
+  <button mat-button (click)="cancelar()">Cancelar</button>
+</div>

@@ -10,16 +10,16 @@ import {CommonModule} from "@angular/common";
     <table *ngIf="agendamentos?.length; else empty">
       <thead>
         <tr>
+          <th>Código</th>
           <th>Data</th>
-          <th>Especialidade</th>
-          <th>Médico</th>
+          <th>Pontos Utilizados</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let ag of agendamentos">
-          <td>{{ ag.data }}</td>
-          <td>{{ ag.especialidade }}</td>
-          <td>{{ ag.medico }}</td>
+          <td>{{ ag.codigoAgendamento }}</td>
+          <td>{{ ag.dataHoraAgendamento | date }}</td>
+          <td>{{ ag.pontosUtilizados }}</td>
         </tr>
       </tbody>
     </table>

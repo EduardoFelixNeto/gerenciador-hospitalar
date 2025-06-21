@@ -32,4 +32,25 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+
+  getUserId(): Observable<number> {
+    const token = this.getToken();
+    if (!token) throw new Error('Token não encontrado');
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const email = payload?.sub;
+      if (!email) throw new Error('Email não encontrado no token');
+
+      return this.getUserIdFromEmail(email);
+    } catch (e) {
+      console.error('Erro ao decodificar token JWT', e);
+      throw e;
+    }
+  }
+
+  getUserIdFromEmail(email: string): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/buscar-id?email=${email}`);
+  }
+
 }

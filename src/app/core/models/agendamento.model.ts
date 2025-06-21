@@ -4,4 +4,7 @@ export interface Agendamento {
   especialidade: string;
   medico: string;
   status: 'CRIADO' | 'CHECK-IN' | 'COMPARECEU' | 'REALIZADO' | 'CANCELADO';
+  codigoAgendamento: string;
+  dataHoraAgendamento: string;
+  pontosUtilizados: string;
 }
