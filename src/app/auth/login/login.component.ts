@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
@@ -24,10 +24,12 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
+        console.log(response);
         this.authService.saveToken(response.token);
-        this.router.navigate(['/autocadastro']);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
+        console.log(err)
         this.errorMessage = 'Login falhou. Verifique suas credenciais.';
       }
     });

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RegisterService } from '../services/register.service';
+import { RegisterService } from '../../core/services/auth/register.service';
 import { Router } from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";

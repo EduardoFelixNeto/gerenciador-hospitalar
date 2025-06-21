@@ -10,8 +10,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, senha: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, senha });
+  login(email: string, senha: string): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, {
+      email,
+      senha
+    });
   }
 
   saveToken(token: string): void {
@@ -24,5 +27,9 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('jwtToken');
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 }
