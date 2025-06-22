@@ -7,6 +7,8 @@ import {CommonModule} from "@angular/common";
 import {MatTab, MatTabsModule, MatTabGroup } from '@angular/material/tabs';
 import {ComprarPontosComponent} from "../pontos/compra-pontos/compra-pontos.component";
 import {MatDialog} from "@angular/material/dialog";
+import {AgendarConsultaComponent} from "../agendamentos/agendar-consulta/agendar-consulta.component";
+import {AgendamentoService} from "../../core/services/agendamento/agendamento.service";
 
 @Component({
   selector: 'app-dashboard-paciente',
@@ -24,6 +26,7 @@ export class DashboardComponent implements OnInit {
   dashboardData!: PacienteDashboard;
 
   constructor(private pacienteService: PacienteService,
+              private agendamentoService: AgendamentoService,
               private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -55,5 +58,32 @@ export class DashboardComponent implements OnInit {
       this.dashboardData = data;
     });
   }
+
+  abrirDialogAgendamento() {
+    const dialogRef = this.dialog.open(AgendarConsultaComponent, {
+      width: '600px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.atualizarDashboard();
+      }
+    });
+  }
+
+  cancelarAgendamento(id: number) {
+    this.agendamentoService.cancelarAgendamento(id).subscribe(() => {
+      console.log('Agendamento cancelado com sucesso');
+      this.atualizarDashboard();
+    });
+  }
+
+  realizarCheckin(id: number) {
+    this.agendamentoService.realizarCheckin(id).subscribe(() => {
+      console.log('Check-in realizado com sucesso');
+      this.atualizarDashboard();
+    });
+  }
+
 
 }

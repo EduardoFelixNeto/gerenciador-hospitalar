@@ -27,7 +27,6 @@ export class UsuarioService {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const email = payload?.sub;
       if (!email) throw new Error('Email não encontrado no token');
-
       return this.getUserIdFromEmail(email);
     } catch (e) {
       console.error('Erro ao decodificar token JWT', e);

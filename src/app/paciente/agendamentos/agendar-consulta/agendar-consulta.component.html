@@ -1,0 +1,32 @@
+<h2>Agendar Consulta</h2>
+
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Especialidade</mat-label>
+    <input matInput formControlName="especialidade">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Médico</mat-label>
+    <input matInput formControlName="medico">
+  </mat-form-field>
+
+  <div *ngIf="consultas.length">
+    <h3>Selecione uma consulta</h3>
+    <mat-selection-list>
+      <mat-list-option *ngFor="let c of consultas" [value]="c.id" (click)="onSelecionarConsulta(c)">
+        {{ c.medico }} - {{ c.especialidade }} - R$ {{ c.valor }}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Pontos a utilizar</mat-label>
+    <input type="number" matInput formControlName="pontosUtilizados">
+  </mat-form-field>
+
+  <p>Valor restante a pagar: R$ {{ valorFinal }}</p>
+
+  <button mat-raised-button color="primary" (click)="agendar()" [disabled]="!form.valid">Confirmar</button>
+  <button mat-button (click)="cancelar()">Cancelar</button>
+</form>

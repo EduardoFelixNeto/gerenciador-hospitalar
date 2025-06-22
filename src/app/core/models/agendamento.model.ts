@@ -1,10 +1,10 @@
 export interface Agendamento {
   id: number;
-  data: string;
-  especialidade: string;
-  medico: string;
-  status: 'CRIADO' | 'CHECK-IN' | 'COMPARECEU' | 'REALIZADO' | 'CANCELADO';
   codigoAgendamento: string;
+  idConsulta: number;
+  idPaciente: number;
+  pontosUtilizados: number;
+  valorPagoComplementar: number;
   dataHoraAgendamento: string;
-  pontosUtilizados: string;
+  status: string;
 }
