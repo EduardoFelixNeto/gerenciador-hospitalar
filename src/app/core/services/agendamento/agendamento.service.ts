@@ -36,4 +36,20 @@ export class AgendamentoService {
   cancelarAgendamento(idAgendamento: number): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/${idAgendamento}/cancelar`, {});
   }
+
+  getProximas48Horas(): Observable<Agendamento[]> {
+    return this.http.get<Agendamento[]>(`${this.baseUrl}/proximas-48h`);
+  }
+
+
+  realizarConsulta(id: number): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/${id}/realizar`, {});
+  }
+
+  confirmarPresencaPorCodigo(codigo: string): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/comparecer`, { codigoAgendamento: codigo });
+  }
+
+
+
 }

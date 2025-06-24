@@ -17,4 +17,5 @@ export class RegisterService {
   getAddressByCep(cep: string): Observable<any> {
     return this.http.get(`https://viacep.com.br/ws/${cep}/json/`);
   }
+
 }

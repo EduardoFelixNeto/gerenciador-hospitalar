@@ -24,9 +24,15 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
-        console.log(response);
         this.authService.saveToken(response.token);
-        this.router.navigate(['/dashboard']);
+
+        const role = this.authService.getUserRole();
+        if (role === 'FUNCIONARIO') {
+          this.router.navigate(['/dashboard-funcionario']);
+        } else {
+          this.router.navigate(['/dashboard-paciente']);
+        }
+
       },
       error: (err) => {
         console.log(err)

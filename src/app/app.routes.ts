@@ -1,6 +1,7 @@
 import {Router, Routes} from '@angular/router';
 import { AuthGuard } from "./core/guard/auth.guard";
 import { inject } from '@angular/core';
+import {DashboardFuncionarioComponent} from "./funcionario/dashboard/dashboard-funcionario.component";
 
 export const routes: Routes = [
   {
@@ -17,9 +18,14 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/register/register.component').then(c => c.RegisterComponent)
   },
   {
-    path: 'dashboard',
+    path: 'dashboard-paciente',
     loadComponent: () => import('./paciente/dashboard/dashboard.component').then(m => m.DashboardComponent),
     canActivate: [() => AuthGuard(inject(Router))]
+  },
+  {
+    path: 'dashboard-funcionario',
+    loadComponent: () => import('./funcionario/dashboard/dashboard-funcionario.component').then(m => m.DashboardFuncionarioComponent),
+    canActivate:  [() => AuthGuard(inject(Router))]
   },
   {
     path: '**',

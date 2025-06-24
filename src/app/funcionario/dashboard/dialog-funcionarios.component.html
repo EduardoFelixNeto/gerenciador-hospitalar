@@ -1,0 +1,14 @@
+<h2>Funcionários Cadastrados</h2>
+  <button mat-raised-button color="primary" (click)="cadastrar()">
+    Cadastrar Novo Funcionário
+  </button>
+<div *ngFor="let funcionario of funcionarios" class="card">
+  <div><strong>Nome:</strong> {{ funcionario.nome }}</div>
+  <div><strong>CPF:</strong> {{ funcionario.cpf }}</div>
+  <div><strong>Email:</strong> {{ funcionario.email }}</div>
+
+  <button mat-button color="primary" (click)="editar(funcionario)">Editar</button>
+  <button mat-button color="warn" (click)="inativar(funcionario.id)">Inativar</button>
+</div>
+
+<button mat-button (click)="fechar()">Fechar</button>

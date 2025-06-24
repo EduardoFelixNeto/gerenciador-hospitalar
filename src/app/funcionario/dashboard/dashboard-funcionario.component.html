@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Consultas nas próximas 48 horas</h2>
+  <button mat-raised-button color="primary" (click)="abrirDialogoCadastroConsulta()">
+    Cadastrar Nova Consulta
+  </button>
+  <button mat-raised-button color="primary" (click)="abrirDialogFuncionarios()">
+    Gerenciar Funcionário
+  </button>
+  <div *ngIf="consultas.length; else semConsultas">
+    <mat-card *ngFor="let consulta of consultas" class="consulta-card">
+      <div class="info">
+        <p><strong>Código:</strong> {{ consulta.codigo }}</p>
+        <p><strong>Data:</strong> {{ consulta.dataHora | date:'short' }}</p>
+        <p><strong>Médico:</strong> {{ consulta.medico }}</p>
+        <p><strong>Status:</strong> {{ consulta.status }}</p>
+        <p><strong>Especialidade:</strong> {{ consulta.especialidadeCodigo }}</p>
+      </div>
+      <div class="acoes">
+        <button mat-raised-button color="primary" (click)="abrirDialogoConfirmar()">Confirmar Presença</button>
+        <button mat-button color="warn" (click)="cancelar(consulta.id)">Cancelar</button>
+        <button mat-button color="accent" (click)="realizar(consulta.id)">Realizar</button>
+      </div>
+    </mat-card>
+  </div>
+
+  <ng-template #semConsultas>
+    <p>Nenhuma consulta marcada para as próximas 48 horas.</p>
+  </ng-template>
+</div>

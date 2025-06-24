@@ -1,0 +1,19 @@
+.container {
+  padding: 20px;
+}
+
+.consulta-card {
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.info p {
+  margin: 4px 0;
+}
+
+.acoes {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

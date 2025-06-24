@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Cadastro de Consulta</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" style="padding: 16px;">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Data e Hora</mat-label>
+    <input matInput formControlName="dataHora" type="datetime-local">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Médico</mat-label>
+    <input matInput formControlName="medico">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Valor</mat-label>
+    <input matInput type="number" formControlName="valor">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Vagas</mat-label>
+    <input matInput type="number" formControlName="vagas">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Especialidade</mat-label>
+    <mat-select formControlName="especialidadeCodigo">
+      <mat-option *ngFor="let esp of especialidades" [value]="esp.codigo">
+        {{ esp.nome }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="button-row">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Cadastrar</button>
+  </div>
+</form>

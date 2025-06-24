@@ -9,4 +9,6 @@ export interface Consulta {
   valor: number;
   vagas: number;
   status: string;
+  codigo: string;
+  especialidadeCodigo: string;
 }

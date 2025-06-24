@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+import {Usuario} from "../../models/usuario.model";
+
+export interface DecodedToken {
+  sub: string; // email
+  role: string; // tipo do usuário (PACIENTE, FUNCIONARIO)
+  exp: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +27,20 @@ export class AuthService {
 
   saveToken(token: string): void {
     localStorage.setItem('jwtToken', token);
+    const decoded: DecodedToken = jwtDecode(token);
+    localStorage.setItem('userRole', decoded.role);
+  }
+
+  getUserRole(): string | null {
+    return localStorage.getItem('userRole');
+  }
+
+  isFuncionario(): boolean {
+    return this.getUserRole() === 'FUNCIONARIO';
+  }
+
+  isPaciente(): boolean {
+    return this.getUserRole() === 'PACIENTE';
   }
 
   getToken(): string | null {
@@ -53,4 +75,24 @@ export class AuthService {
     return this.http.get<number>(`${this.apiUrl}/buscar-id?email=${email}`);
   }
 
+  listarFuncionarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}?tipo=FUNCIONARIO&ativo=true`);
+  }
+
+  inativarFuncionario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  atualizarFuncionario(payload: {
+    tipo: string;
+    endereco: string;
+    pontos: number;
+    cpf: string;
+    nome: string;
+    id: number | undefined;
+    email: string;
+    cep: string
+  }) {
+    return this.http.put<void>(`${this.apiUrl}/atualizar-funcionario`, payload, { responseType: 'text' as 'json' });
+  }
 }

@@ -26,10 +26,15 @@ export class ConsultaService {
   }
 
   cancelarConsulta(id: number): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/${id}/cancelar`, {});
+    return this.http.post<void>(`${this.baseUrl}/${id}/cancelar-consulta`, {});
   }
 
-  finalizarConsulta(id: number): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/${id}/finalizar`, {});
+  realizarConsulta(id: number): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/${id}/realizar`, {});
   }
+
+  getProximas48Horas(): Observable<Consulta[]> {
+    return this.http.get<Consulta[]>(`${this.baseUrl}/dashboard-funcionario`);
+  }
+
 }
